@@ -1,0 +1,45 @@
+ <ul class="nav navbar-nav navbar-right">
+        <li>
+            <div class="cart-container">
+
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-cart-fill me-1"></i>Корзина
+                    <span id="cart_total_amount"></span><span id="cart_total_count">
+                    {% if products_total_count %}
+                        ({{ products_total_count }})
+                    {% else %}
+                        (0)
+                    {% endif %}
+                    </span>
+                </button>
+
+                <div class="cart-items hidden">
+                        <ul class="">
+                            {% for product_in_cart in products_in_cart %}
+                                <li>
+                                    <div class="cart-elements mt-2">
+                                        <span class="title-item">
+                                            {{ product_in_cart.product.title }}
+                                        </span>
+                                        <span class="count-item">
+                                            {{ product_in_cart.count }} шт.
+                                        </span>
+                                        <span class="price-item">
+                                            {{ product_in_cart.price_per_item }} ₽
+                                        </span>
+                                         <a class="delete-item" href="" data-product_id="{{ product_in_cart.id }}"><i class="bi bi-x-lg"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="mt-2">
+                            <a class= "new-order" href="{% url 'checkout'  %}">
+                                Оформить заказ
+                            </a>
+                        </div>
+
+                </div>
+            </div>
+        </li>
+  </ul>

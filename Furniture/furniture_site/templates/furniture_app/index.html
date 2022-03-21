@@ -1,0 +1,61 @@
+{% extends 'furniture_app/base.html'%}
+
+{% block header %}
+        <header class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Консольная мебель</h1>
+                    <h3 class="display-5 fw-bolder">в ваш дом</h3>
+                        <div class="d-flex justify-content-center">
+                            <a class='nav-link' href="#!">
+                                <p class="lead fw-normal text-white-50 mb-0">Узнать больше
+                                    <i class="bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
+
+{% block content %}
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2>Наши проекты</h2>
+        <div class="pt-3 row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+            {% for i in project_photo %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Item image-->
+                        <img class="card-img-top" src="{{i.image.url}}" alt="..." />
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Столбцы с иконками</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="feature col">
+        <div class="feature-icon bg-success bg-gradient">
+          <svg class="bi" width="1em" height="1em"></svg>
+        </div>
+        <h2>Избранный заголовок</h2>
+        <p>Абзац текста под заголовком, поясняющий заголовок. Мы добавим к нему еще одно предложение и, вероятно, просто продолжим, пока у нас не закончатся слова.</p>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon bg-success bg-gradient">
+          <svg class="bi" width="1em" height="1em"></svg>
+        </div>
+        <h2>Избранный заголовок</h2>
+        <p>Абзац текста под заголовком, поясняющий заголовок. Мы добавим к нему еще одно предложение и, вероятно, просто продолжим, пока у нас не закончатся слова.</p>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon bg-success bg-gradient">
+          <svg class="bi" width="1em" height="1em"></svg>
+        </div>
+        <h2>Избранный заголовок</h2>
+        <p>Абзац текста под заголовком, поясняющий заголовок. Мы добавим к нему еще одно предложение и, вероятно, просто продолжим, пока у нас не закончатся слова.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'furniture_app/base.html'%}
+
+{% block select %}
+        <div class="container-fluid px-lg-5 mt-5 btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% for c in categories %}
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio{{c.slug}}" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="btnradio{{c.slug}}"><a class="nav-link" href="{{ c.get_absolute_url }}">{{c.name}}</a></label>
+                {% endfor %}
+        </div>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                    {% for p in products %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                        {% if p.image %}
+                                            <a href="{% url 'product' p.slug %}"><img class="card-img-top" src="{{ p.image.url }}" alt="..." /></a>
+                                        {% endif %}
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{p.title}}</h5>
+                                        <!-- Product price-->
+                                        {{p.price}} ₽
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto" href="#!"><i class="bi bi-cart-plus"></i></a>
+                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' p.slug %}">Подробнее <i class="bi bi-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+{% endblock %}
