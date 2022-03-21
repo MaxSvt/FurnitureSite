@@ -82,7 +82,7 @@ def checkout(request):
                     product_in_cart.order = order
                     product_in_cart.save(force_update=True)
 
-                    ProductInOrder.objects.create(product=product_in_cart.product, nmb=product_in_cart.count,
+                    ProductInOrder.objects.create(product=product_in_cart.product, count=product_in_cart.count,
                                                   price_per_item=product_in_cart.price_per_item,
                                                   total_price=product_in_cart.total_price,
                                                   order=order)

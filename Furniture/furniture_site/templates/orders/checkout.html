@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
+    <div class="container content">
         <div class="row">
             {% if products_in_cart %}
                 <div class="col-lg-12 col-lg-offset-2 mt-4">
@@ -11,12 +11,11 @@
                             {{ request.session.cart.products }}
 
                     <form class="form-horizontal" method="post">{% csrf_token %}
-
                             <div class="form-group">
                                 <div class="col-lg-2">
                                     <label>Имя</label>
                                     <span class="form-error">{{ form.name.errors }}</span>
-                                    <input type="text" name="{{ form.name.html_name }}" class="form-control mt-2"
+                                    <input type="text" name="name" class="form-control mt-2"
                                         value="{{ request.POST.name }}">
                                 </div>
                             </div>
@@ -25,11 +24,10 @@
                                 <div class="col-lg-2">
                                      <label>Телефон</label>
                                      <span class="form-error">{{ form.phone.errors }}</span>
-                                    <input type="text" name="{{ form.phone.html_name }}" class="form-control mt-2"
+                                    <input type="text" name="phone" class="form-control mt-2"
                                         value="{{ request.POST.phone }}">
                                 </div>
                             </div>
-
 
                         <table class="mt-3 table text-center">
                             <thead>
@@ -81,6 +79,7 @@
              {% else %}
                 <div class="mt-5 mb-5">
                     <h3 class="text-center">В Вашей корзине нет товаров</h3>
+                    <h4 class="text-center">Перейдите на страницу с товарами для оформления заказа</h4>
                 </div>
             {% endif %}
 
