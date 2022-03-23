@@ -28,23 +28,9 @@
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url m.page_url %}">{{ m.title }}</a></li>
                         {% endfor %}
                     </ul>
-                    <form class="d-flex">
-                        {% for l in login_page %}
-                        <button class="btn btn-outline-danger" type="submit" style="margin-right: 15px">
-                            <i class="bi bi-person-fill"></i>
-                            {{ l.title }}
-                        </button>
-                        {% endfor %}
-                    </form>
-<!--                    <form class="d-flex">-->
-<!--                        {% for c in cart_page %}-->
-<!--                        <button class="btn btn-outline-dark" type="submit">-->
-<!--                            <i class="bi-cart-fill me-1"></i>-->
-<!--                            {{ c.title }}-->
-<!--                            <span class="badge bg-dark text-white ms-1 rounded-pill">1</span>-->
-<!--                        </button>-->
-<!--                        {% endfor %}-->
-<!--                    </form>-->
+                        <a href="{% url 'login' %}" class="btn btn-danger btn-lg" role="button">
+                                <i class="bi bi-person-fill"></i>Войти
+                        </a>
                     {% include 'orders/basket.html' %}
                 </div>
             </div>

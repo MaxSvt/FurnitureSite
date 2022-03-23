@@ -46,11 +46,12 @@ footer{
     position: relative;
     width: 250px;
     padding: 15px 10px;
+    height: 40px;
 }
 
 .cart-items{
     position: absolute;
-    top: 50px;
+    top: 37px;
     width: 130%;
     background-color: #dee6da;
     z-index: 10;
@@ -130,4 +131,8 @@ ul{
 
 .form-error{
     color: red;
+}
+
+.cart-button{
+    margin-top: -17px;
 }

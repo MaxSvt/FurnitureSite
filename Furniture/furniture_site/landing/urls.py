@@ -5,5 +5,4 @@ urlpatterns = [
     path('', index, name='home'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
-    # path('product/', main_product, name='furniture'),
 ]

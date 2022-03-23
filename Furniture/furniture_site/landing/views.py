@@ -7,8 +7,6 @@ def index(request):
     context = {
         'menu': menu,
         'title': 'Главная',
-        'login_page': login_page,
-        'cart_page': cart_page,
         'project_photo': project_photo
     }
 
@@ -19,8 +17,6 @@ def about(request):
     context = {
         'menu': menu,
         'title': 'О нас',
-        'login_page': login_page,
-        'cart_page': cart_page
     }
     return render(request, 'furniture_app/about.html', context=context)
 
@@ -29,7 +25,5 @@ def contact(request):
     context = {
         'menu': menu,
         'title': 'Контакты',
-        'login_page': login_page,
-        'cart_page': cart_page
     }
     return render(request, 'furniture_app/contact.html', context=context)

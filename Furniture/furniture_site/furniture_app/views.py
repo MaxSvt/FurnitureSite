@@ -1,25 +1,20 @@
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from orders.models import Order
+from .forms import *
 from .utils import *
 
 
-def login(request):
-    context = {
-        'login_page': login_page,
-    }
-    return render(request, 'furniture_app/login.html', context=context)
-
-
-def product_cart(request):
-    cart = Order.objects.all()
-    context = {
-        'cart': cart,
-        'login_page': login_page,
-    }
-    return render(request, 'furniture_app/cart.html', context=context)
+# def login(request):
+#     context = {
+#         'login_page': login_page,
+#     }
+#     return render(request, 'furniture_app/login.html', context=context)
 
 
 class FurnitureHome(DataMixin, ListView):
@@ -58,6 +53,31 @@ class ShowProduct(DataMixin, DetailView):
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = ResisterUserForm
+    template_name = 'furniture_app/register.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Регистрация")
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+
+
+class LoginUser(DataMixin, LoginView):
+    form_class = LoginUserForm
+    template_name = 'furniture_app/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Авторизация")
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('home')
 
 # def main_product(request):
 #     products_images = ProductImage.objects.filter(is_active=True, is_main=True)
