@@ -1,0 +1,72 @@
+{% extends 'furniture_app/base.html'%}
+
+{% block content %}
+
+    <div class="margin-page container px-4 text-center px-lg-5">
+        <div class="col-sm-12 col-sm-offset-3 ">
+            <h1 class="text-align-center">Профиль</h1>
+            <div class="row gx-5 mt-3">
+        <div class="col">
+         <div class="p-3 bg-light">
+            <i class="bi bi-person-circle"></i>
+             <span><p class="h5">Имя: </p><p>{{user.first_name}}</p></span>
+
+            <p class="h5">Фамилия: {{user.last_name}}</p>
+            <p>Почта: {{ user.email }}</p>
+            <p>Номер телефона: {{ user.username }}</p>
+         </div>
+        </div>
+          <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Item image-->
+
+                </div>
+            </div>
+      </div>
+
+            <table class="mt-4 table text-center">
+                            <thead>
+                                <tr>
+                                    <th>Статус заказа</th>
+                                    <th>Название товара</th>
+                                    <th>Количество</th>
+                                    <th>Общая цена</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for u in user.order_set.all %}
+                                    <tr>
+                                        <td>
+                                            {% if u.status %}
+                                                    <p>{{u.status}}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="product-title">
+                                            {% for i in u.productinorder_set.all %}
+                                                <p>{{ i.product.title }}</p>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for i in u.productinorder_set.all %}
+                                            <span class="product-price">
+                                                <p>{{ i.count }}</p>
+                                            </span>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            <span class="total-product-in-cart-amount">
+                                                <p>{{ u.total_price }} руб.</p>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+        </div>
+
+        <a href="{% url 'logout' %}" class="login-button btn-danger" role="button">
+                <i class="bi bi-box-arrow-left"></i> Выйти
+        </a>
+    </div>
+
+{% endblock %}

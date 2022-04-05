@@ -3,17 +3,22 @@
 {% block content %}
     <h1 class="mt-3 text-center">{{ title }}</h1>
 
-    <div class="text-center">
-        <form method="post" class="mb-3">
-        {% csrf_token %}
-            <div class="form-error">{{ form.non_field_errors }}</div>
-        {% for f in form %}
-            <p><label class="form-label" for="{{f.id_for_label}}">{{f.label}}:</label> {{ f }}</p>
-            <div class="form-error">{{ f.errors }}</div>
-            {% endfor %}
-        <button type="submit">Войти</button>
-    </form>
-        <a href="{% url 'register' %}" role="button">Регистрация</a>
+    <div class="text-center mb-5 w-25 mx-auto">
+        <main class="form-signin">
+          <form method="post" class="mb-3">
+              {% csrf_token %}
+                <div class="form-error">{{ form.non_field_errors }}</div>
+              {% for f in form %}
+                <div class="form-floating mb-2">
+<!--                  <input class="form-control" id="floatingInput" placeholder="89214345676">-->
+                    {{ f }}
+                  <label class="form-label" for="{{f.id_for_label}}">{{f.label}}</label>
+                </div>
+              {% endfor %}
+            <button class="mt-3 w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+          </form>
+            <a href="{% url 'register' %}" role="button">Регистрация</a>
+        </main>
     </div>
 
 {% endblock %}

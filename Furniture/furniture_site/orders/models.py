@@ -15,7 +15,7 @@ class Status(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True, verbose_name="Изменен")
 
     def __str__(self):
-        return "Статус %s" % self.name
+        return self.name
 
     class Meta:
         verbose_name = 'Статус заказа'
@@ -26,6 +26,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, default=None, verbose_name="Пользователь", on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Общая цена") #total price for all products in order
     customer_name = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Имя пользователя")
+    customer_lastname = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Фамилия пользователя")
     customer_email = models.EmailField(blank=True, null=True, default=None, verbose_name="Почта")
     customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None, verbose_name="Номер телефона")
     customer_address = models.CharField(max_length=128, blank=True, null=True, default=None, verbose_name="Адрес")

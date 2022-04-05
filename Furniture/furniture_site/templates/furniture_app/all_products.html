@@ -1,7 +1,7 @@
 {% extends 'furniture_app/base.html'%}
 
 {% block select %}
-        <div class="container-fluid px-lg-5 mt-5 btn-group" role="group" aria-label="Basic radio toggle button group">
+        <div class="select-category container-fluid px-lg-5 btn-group" role="group" aria-label="Basic radio toggle button group">
             {% for c in categories %}
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio{{c.slug}}" autocomplete="off">
                         <label class="btn btn-secondary category-items" for="btnradio{{c.slug}}"><a class="nav-item" href="{{ c.get_absolute_url }}">{{c.name}}</a></label>
@@ -12,7 +12,7 @@
 {% block content %}
 
 <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+            <div class="container px-4 px-lg-5 mt-3">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                     {% for p in products %}
                         <div class="col mb-5">
@@ -33,8 +33,8 @@
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center">
-                                        <a class="btn btn-outline-dark mt-auto" href="#!"><i class="bi bi-cart-plus"></i></a>
                                         <a class="btn btn-outline-dark mt-auto" href="{% url 'product' p.slug %}">Подробнее <i class="bi bi-arrow-right"></i></a>
+<!--                                        <a class="btn btn-outline-dark mt-auto" href="#!"><i class="bi bi-cart-plus"></i></a>-->
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,10 @@
+from django.contrib.auth import logout, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from orders.models import Order
@@ -10,15 +12,8 @@ from .forms import *
 from .utils import *
 
 
-# def login(request):
-#     context = {
-#         'login_page': login_page,
-#     }
-#     return render(request, 'furniture_app/login.html', context=context)
-
-
 class FurnitureHome(DataMixin, ListView):
-    template_name = 'furniture_app/product.html'
+    template_name = 'furniture_app/all_products.html'
     context_object_name = 'products'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -29,7 +24,7 @@ class FurnitureHome(DataMixin, ListView):
 
 
 class ProductCategory(DataMixin, ListView):
-    template_name = 'furniture_app/product.html'
+    template_name = 'furniture_app/all_products.html'
     context_object_name = 'products'
 
     def get_queryset(self):
@@ -57,13 +52,18 @@ class ShowProduct(DataMixin, DetailView):
 class RegisterUser(DataMixin, CreateView):
     form_class = ResisterUserForm
     template_name = 'furniture_app/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title="Регистрация")
         context = dict(list(context.items()) + list(c_def.items()))
         return context
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
 
 
 class LoginUser(DataMixin, LoginView):
@@ -79,6 +79,29 @@ class LoginUser(DataMixin, LoginView):
     def get_success_url(self):
         return reverse_lazy('home')
 
+
+class ShowProfilePageView(DataMixin, DetailView):
+    model = User
+    template_name = 'furniture_app/user_profile.html'
+    context_object_name = 'user'
+
+    def get_context_data(self, *args, **kwargs):
+        users = User.objects.all()
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(User, id=self.kwargs['pk'])
+        user_order = Order.objects.all()
+        c_def = self.get_user_context(title="Профиль")
+        context['page_user'] = page_user
+        context['users'] = users
+        context['user_order'] = user_order
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
 # def main_product(request):
 #     products_images = ProductImage.objects.filter(is_active=True, is_main=True)
 #     categories = Category.objects.all()
@@ -90,7 +113,7 @@ class LoginUser(DataMixin, LoginView):
 #         'login_page': login_page,
 #         'cart_page': cart_page
 #         }
-#     return render(request, 'furniture_app/product.html', context=context)
+#     return render(request, 'furniture_app/all_products.html', context=context)
 
 
 # def show_category(request, category_slug):
@@ -103,7 +126,7 @@ class LoginUser(DataMixin, LoginView):
 #         'categories': categories,
 #         'category_selected': category_slug,
 #     }
-#     return render(request, 'furniture_app/product.html', context=context)
+#     return render(request, 'furniture_app/all_products.html', context=context)
 
 
 # def show_product(request, product_slug):

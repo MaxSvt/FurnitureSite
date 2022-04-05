@@ -45,9 +45,11 @@ def cart_adding(request):
 
 
 def checkout(request):
+    users = User.objects.all()
     context = {
         'menu': menu,
         'title': 'Корзина',
+        'users': users
     }
 
     session_key = request.session.session_key
@@ -61,10 +63,12 @@ def checkout(request):
             print("yes")
             data = request.POST
             name = data.get("name", "3423453")
+            last_name = data.get("last_name")
             phone = data["phone"]
-            user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name})
+            user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name, "last_name": last_name})
+            # Customer.objects.create(user=user, name=name, lastname=last_name, phone=phone)
 
-            order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+            order = Order.objects.create(user=user, customer_name=name, customer_lastname=last_name, customer_phone=phone,  status_id=1)
 
             for name, value in data.items():
                 if name.startswith("product_in_cart_"):

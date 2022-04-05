@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+
 
 User = get_user_model()
 
@@ -59,9 +61,12 @@ class ProductImage(models.Model):
 
 
 class Customer(models.Model):
-    user = models.ForeignKey(User, verbose_name="Покупатель", on_delete=models.CASCADE)
-    phone = models.CharField(max_length=20, verbose_name="Номер телефона")
-    address = models.CharField(max_length=100, verbose_name="Адрес")
+    user = models.OneToOneField(User, verbose_name="Покупатель", on_delete=models.CASCADE)
+    name = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Имя пользователя")
+    lastname = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Фамилия пользователя")
+    email = models.EmailField(blank=True, null=True, default=None, verbose_name="Почта")
+    phone = models.CharField(max_length=48, blank=True, null=True, default=None, verbose_name="Номер телефона")
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
         verbose_name = "Покупатель"

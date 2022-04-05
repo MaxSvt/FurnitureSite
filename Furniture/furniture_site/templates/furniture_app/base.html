@@ -18,7 +18,28 @@
     <body>
         <!-- Navigation-->
         {% block mainmenu %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!--        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">-->
+<!--          <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="#">Fixed navbar</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--              <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarCollapse">-->
+<!--              <ul class="navbar-nav me-auto mb-2 mb-md-0">-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link" href="#">Link</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                  <a class="nav-link disabled">Disabled</a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </nav>-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'home' %}">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -28,9 +49,15 @@
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url m.page_url %}">{{ m.title }}</a></li>
                         {% endfor %}
                     </ul>
-                        <a href="{% url 'login' %}" class="btn btn-danger btn-lg" role="button">
-                                <i class="bi bi-person-fill"></i>Войти
-                        </a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'user_profile' user.id %}" class="login-button btn-danger" role="button">
+                                    <i class="bi bi-person-fill"></i>Профиль
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="login-button btn-danger" role="button">
+                                    <i class="bi bi-person-fill"></i>Войти
+                            </a>
+                        {% endif %}
                     {% include 'orders/basket.html' %}
                 </div>
             </div>
@@ -41,17 +68,19 @@
         {% block header %}
 
         {% endblock %}
+
         <!-- Section-->
         {% block select %}
 
         {% endblock %}
 
+        <!-- Content-->
         {% block content %}
 
         {% endblock %}
+
         <!-- Footer-->
-        <!-- Footer -->
-<footer class="page-footer font-small indigo bg-success">
+<footer class="page-footer font-small indigo">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left">
@@ -123,7 +152,7 @@ tempor incididunt ut labore et dolore magna aliqua.  </p>
         <p class="text-white">
             <a href="#!" class="text-white px-1"><i class="bi bi-youtube"></i></a>
             <a href="#!" class="text-white px-1"><i class="bi bi-whatsapp"></i></a>
-            <a href="#!" class="text-white px-1"><i class="bi bi-instagram"></i></a>
+            <a href="#!" class="text-white px-1"><i class="bi bi-telegram"></i></a>
         </p>
       </div>
       <!-- Grid column -->
@@ -132,7 +161,7 @@ tempor incididunt ut labore et dolore magna aliqua.  </p>
   </div>
   <!-- Footer Links -->
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3 text-white">© 2022 Copyright: Svetlov Maksim
+  <div class="footer-copyright text-center py-3 text-white">© 2022 Copyright: Svetlov Maxim
 
   </div>
   <!-- Copyright -->
