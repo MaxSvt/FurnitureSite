@@ -2,9 +2,11 @@
 
 {% block header %}
         <header class="py-5 ">
-<!--            <img src="media/main_images/index-image.jpg" alt="" class="background">-->
+<!--            <div class="bg-image">-->
+<!--                <img src="media/main_images/index-image.jpg" alt="" class="background">-->
+<!--            </div>-->
             <div class="container px-4 px-lg-5 my-5">
-                <div class="text-white">
+                <div class="main-text text-white">
                     <h1 class="display-4 fw-bolder">Консольная мебель</h1>
                     <h3 class="display-5 fw-bolder">в ваш дом</h3>
                         <div class="d-flex">
@@ -20,7 +22,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="our-projects container px-4 px-lg-5 mt-5">
         <h2>Наши проекты</h2>
         <div class="pt-3 row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
             {% for i in project_photo %}
@@ -37,8 +39,8 @@
         <div class="container px-3 px-lg mt-5">
             <div class="row featurette mt-5 bg-dark">
               <div class="col-md-7">
-                <h2 class="featurette-heading">Подробнее о нас<span class="text-muted">Чем мы занимаемся </span></h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id sagittis ligula. Ut nec est egestas, imperdiet sem et, hendrerit nunc. In hac habitasse platea dictumst. Nulla interdum magna id eros commodo, in venenatis purus egestas. Vestibulum enim augue, vehicula nec mi eget, efficitur imperdiet magna. Cras venenatis ipsum quis nisl efficitur aliquam. Ut ac quam eu risus vehicula convallis. Quisque vitae posuere lorem.
+                <h2 class="text-white">Чем мы занимаемся</h2>
+                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id sagittis ligula. Ut nec est egestas, imperdiet sem et, hendrerit nunc. In hac habitasse platea dictumst. Nulla interdum magna id eros commodo, in venenatis purus egestas. Vestibulum enim augue, vehicula nec mi eget, efficitur imperdiet magna. Cras venenatis ipsum quis nisl efficitur aliquam. Ut ac quam eu risus vehicula convallis. Quisque vitae posuere lorem.
     Sed dignissim tempus erat, vel imperdiet nisl finibus et. Curabitur blandit commodo orci at tempor. Maecenas fringilla venenatis posuere. Nam suscipit orci at neque euismod, vel aliquet lectus sollicitudin. Nulla sed neque iaculis, ultrices dolor sit amet, congue nulla. Fusce molestie lacus sit amet semper ultrices. </p>
               </div>
               <div class="col-md-5">

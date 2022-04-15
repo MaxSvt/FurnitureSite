@@ -17,6 +17,11 @@
             <h2>{{ product.title }}</h2>
             <div class="p-3 bg-light">
                 <p class="h5">Цена: {{ product.price }}</p>
+                <button class="btn btn-dark">
+                    Посмотреть в дополненной реальности
+                    <i class="bi bi-chevron-right"></i>
+<!--                    <img src="media/main_images/AR-icon.png" alt="" class="ar_icon">-->
+                </button>
             </div>
          <div class="p-3 bg-light">
              <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -24,7 +29,7 @@
                     <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab" aria-controls="home" aria-selected="true">Описание</button>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="short_desc-tab" data-bs-toggle="tab" data-bs-target="#short_desc" type="button" role="tab" aria-controls="profile" aria-selected="false">Характеристики</button>
+                    <button class="nav-link " id="short_desc-tab" data-bs-toggle="tab" data-bs-target="#short_desc" type="button" role="tab" aria-controls="profile" aria-selected="false">Характеристики</button>
                   </li>
                   <li class="nav-item" role="presentation">
                     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
@@ -50,6 +55,7 @@
                                 </button>
                             </div>
                     </form>
+
             </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 from furniture_app.utils import *
 from orders.forms import CheckoutContactForm
@@ -86,4 +87,5 @@ def checkout(request):
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
         else:
             print("no")
+
     return render(request, 'orders/checkout.html', context)

@@ -8,12 +8,10 @@
             <div class="row gx-5 mt-3">
         <div class="col">
          <div class="p-3 bg-light">
-            <i class="bi bi-person-circle"></i>
-             <span><p class="h5">Имя: </p><p>{{user.first_name}}</p></span>
 
-            <p class="h5">Фамилия: {{user.last_name}}</p>
-            <p>Почта: {{ user.email }}</p>
-            <p>Номер телефона: {{ user.username }}</p>
+             <p class="h5 mt-3"><i class="bi bi-person-circle"></i> {{user.first_name}} {{user.last_name}}</p>
+            <p class="h5 mt-3"><i class="bi bi-envelope"></i> {{ user.email }}</p>
+            <p class="h5 mt-3"><i class="bi bi-telephone"></i> {{ user.username }}</p>
          </div>
         </div>
           <div class="col mb-5">

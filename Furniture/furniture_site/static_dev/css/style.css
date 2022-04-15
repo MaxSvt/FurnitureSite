@@ -10,8 +10,17 @@ header{
     height: 30rem;
 }
 
-.background{
-    width: 100%;
+.content{
+    flex: 1 0 auto;
+}
+
+.main-text{
+    margin-top: 100px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+footer{
+    flex: 0 0 auto;
 }
 
 .page-footer{
@@ -19,6 +28,7 @@ header{
     margin-top: 50px;
     clear: both;
     flex: 0 0 auto;
+    bottom: 0;
 }
 
 .more-btn{
@@ -67,21 +77,23 @@ header{
 
 .cart-container{
     position: relative;
-    width: 250px;
+    width: 270px;
     padding: 15px 10px;
     height: 40px;
 }
 
 .cart-items{
+    left: -60%;
     position: absolute;
     top: 37px;
     width: 130%;
     background-color: white;
     border: 1px solid rgba(222, 222, 222, 222);
-    opacity: .8;
+    opacity: .9;
     z-index: 10;
     padding: 10px;
-    margin-top: 3px;
+    margin-top: 4px;
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -92,6 +104,10 @@ header{
     margin-left: 10px;
     border-bottom: 1px solid #c9c9c9;
     margin-bottom: 20px;
+}
+
+.empty-cart{
+    margin-bottom: 27%;
 }
 
 .hidden{
@@ -172,7 +188,7 @@ ul{
     -moz-user-select: none;
     user-select: none;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 0px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
     border-radius: 0.5rem;
@@ -222,6 +238,15 @@ ul{
     margin-top: 5rem;
 }
 
+.login-page{
+    margin-top: 6rem;
+    margin-bottom: 10rem;
+}
+
 .margin-furniture{
     margin-top: 7rem;
+}
+
+.ar_icon{
+    color: white;
 }
