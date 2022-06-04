@@ -2,62 +2,87 @@
 
 {% block content %}
      <div class="margin-furniture container px-4">
-      <div class="row gx-5 mt-3">
-          <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Item image-->
-                    {% for i in product.productimage_set.all %}
-                        {% if i.image %}
-                            <img class="card-img-top" src="{{i.image.url}}" alt="..." />
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        <div class="col">
-            <h2>{{ product.title }}</h2>
-            <div class="p-3 bg-light">
-                <p class="h5">Цена: {{ product.price }}</p>
-                <button class="btn btn-dark">
-                    Посмотреть в дополненной реальности
-                    <i class="bi bi-chevron-right"></i>
-<!--                    <img src="media/main_images/AR-icon.png" alt="" class="ar_icon">-->
-                </button>
-            </div>
-         <div class="p-3 bg-light">
-             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab" aria-controls="home" aria-selected="true">Описание</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link " id="short_desc-tab" data-bs-toggle="tab" data-bs-target="#short_desc" type="button" role="tab" aria-controls="profile" aria-selected="false">Характеристики</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-                  </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="desc" role="tabpanel" aria-labelledby="home-tab"><p class="mt-3">{{ product.description }}</p></div>
-                  <div class="tab-pane fade" id="short_desc" role="tabpanel" aria-labelledby="short_desc-tab"><p class="mt-3">{{ product.short_description }}</p></div>
-                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-                </div>
-         </div>
-            <div class="mt-2 mb-4">
-                <form id="form_buying_product" class="form-inline" action="{% url 'cart_adding' %}">{% csrf_token %}
-                        <div class="form-group">
-                             <input type="number" class="form-control" name="count" id="count" min="1" max="50" value="1">
-                        </div>
-                            <div class="form-group mt-2">
-                                <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
-                                    data-product_id = "{{ product.id }}"
-                                    data-title ="{{ product.title }}"
-                                    data-price ="{{ product.price }}">
-                                    Купить
-                                </button>
+         <div class="row g-5 mb-5">
+             <div class="col-md-6">
+                 <div class="col mb-2">
+                    <div class="card h-100">
+                        <!-- Item image-->
+                        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for i in product.productimage_set.all %}
+                                    {% if i.image and i.is_main and i.is_active %}
+                                    <div class="carousel-item active" data-bs-interval="10000">
+                                          <img class="card-img-top" src="{{i.image.url}}" alt="..." />
+                                    </div>
+                                    {% endif %}
+                                    {% if i.image and i.is_additional %}
+                                    <div class="carousel-item" data-bs-interval="10000">
+                                          <img class="card-img-top" src="{{i.image.url}}" alt="..." />
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                    </form>
 
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Предыдущая</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Следующая</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+             </div>
+             <div class="col-md-6">
+                 <div class="col">
+                    <h2>{{ product.title }} <img class="ar-icon" src="/media/main_images/ar-icon.png" alt=""></h2>
+                         <p class="h5">    Посмотрите на товар в дополненной реальности</p>
+                     <a href="/media/komod.usdz" class="ar-link hidden">
+                         <p class="lead fw-normal mb-0">Посмотрите в дополненной реальности <i class="bi bi-chevron-right"></i></p>
+                     </a>
+                     <p class="ar-help hidden">Откройте эту страницу в браузере телефона или планшета</p>
+                    <div class="p-3 bg-light mt-3">
+                        <p class="h5">Цена: {{ product.price }} </p>
+<!--                        <p>{{ product.slug }}</p>-->
+                    </div>
+                 <div class="p-3 bg-light">
+                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab" aria-controls="home" aria-selected="true">Описание</button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <button class="product-character nav-link" id="short_desc-tab" data-bs-toggle="tab" data-bs-target="#short_desc" type="button" role="tab" aria-controls="profile" aria-selected="false">Характеристики</button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <button class="product-character nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Дополнительно</button>
+                          </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                          <div class="tab-pane fade show active" id="desc" role="tabpanel" aria-labelledby="home-tab"><p class="mt-3">{{ product.description }}</p></div>
+                          <div class="tab-pane fade" id="short_desc" role="tabpanel" aria-labelledby="short_desc-tab"><p class="mt-3">{{ product.characters }}</p></div>
+                          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        </div>
+                 </div>
+                    <div class="mt-2 mb-4">
+                        <form id="form_buying_product" class="form-inline" action="{% url 'cart_adding' %}">{% csrf_token %}
+                                <div class="form-group d-grid gap-2 d-sm-flex">
+                                     <input type="number" class="form-control" name="count" id="count" min="1" max="50" value="1">
+                                    <div class="form-group">
+                                        <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                                            data-product_id = "{{ product.id }}"
+                                            data-title ="{{ product.title }}"
+                                            data-price ="{{ product.price }}">
+                                            Купить
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
             </div>
-        </div>
-      </div>
+         </div>
      </div>
 {% endblock %}

@@ -2,19 +2,24 @@ $(document).ready(function(){
     var form = $('#form_buying_product');
     console.log(form);
 
+    if ($(window).width() > 761) {
+        $('.ar-help').removeClass('hidden');
+      } else {
+        $('.ar-link').removeClass('hidden');
+    }
+
     function cartUpdating(product_id, count, is_delete){
         var data = {};
         data.product_id = product_id;
         data.count = count;
          var csrf_token = $('#form_buying_product [name="csrfmiddlewaretoken"]').val();
-//         data: {csrfmiddlewaretoken: getCookie('csrftoken')}
          data["csrfmiddlewaretoken"] = csrf_token;
 
         if (is_delete){
             data["is_delete"] = true;
         }
 
-         var url = form.attr("action");
+        var url = form.attr("action");
 
         console.log(data)
          $.ajax({

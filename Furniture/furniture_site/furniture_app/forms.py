@@ -17,3 +17,29 @@ class ResisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Номер телефона', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+class UserEditForm(forms.ModelForm):
+    first_name = forms.CharField(
+        min_length=2,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Имя', 'class': 'form-control'}
+        )
+    )
+
+    last_name = forms.CharField(
+        min_length=2,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Имя', 'class': 'form-control'}
+        )
+    )
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={'placeholder': 'Email', 'class': 'form-control'}
+        )
+    )
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')

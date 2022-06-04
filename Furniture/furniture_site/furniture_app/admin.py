@@ -8,7 +8,7 @@ class ProductImageInLine(admin.TabularInline):
 
 
 class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'is_main', 'is_active', 'created', 'updated')
+    list_display = ('id', 'product', 'is_main', 'is_additional', 'is_active', 'created', 'updated')
     list_display_links = ('id', 'product')
     search_fields = ('product',)
 

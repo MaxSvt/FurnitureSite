@@ -66,10 +66,12 @@ def checkout(request):
             name = data.get("name", "3423453")
             last_name = data.get("last_name")
             phone = data["phone"]
-            user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name, "last_name": last_name})
+            user, created = User.objects.get_or_create(username=phone, defaults={"first_name": name,
+                                                                                 "last_name": last_name})
             # Customer.objects.create(user=user, name=name, lastname=last_name, phone=phone)
 
-            order = Order.objects.create(user=user, customer_name=name, customer_lastname=last_name, customer_phone=phone,  status_id=1)
+            order = Order.objects.create(user=user, customer_name=name, customer_lastname=last_name,
+                                         customer_phone=phone,  status_id=1)
 
             for name, value in data.items():
                 if name.startswith("product_in_cart_"):
@@ -88,4 +90,4 @@ def checkout(request):
         else:
             print("no")
 
-    return render(request, 'orders/checkout.html', context)
+    return render(request, 'furniture_app/checkout.html', context)

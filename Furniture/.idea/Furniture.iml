@@ -12,7 +12,7 @@
     <option name="namespacePackageFolders">
       <list>
         <option value="$MODULE_DIR$/furniture_site/templates/furniture_app" />
-        <option value="$MODULE_DIR$/furniture_site/templates/landing" />
+        <option value="$MODULE_DIR$/furniture_site/templates/orders" />
       </list>
     </option>
   </component>

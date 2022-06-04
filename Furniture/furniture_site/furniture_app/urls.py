@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import *
 
 urlpatterns = [
@@ -9,4 +10,5 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name='register'),
     path('category/<slug:category_slug>/', ProductCategory.as_view(), name='category'),
     path('product/<slug:product_slug>', ShowProduct.as_view(), name='product'),
+    path('edit_profile/', edit, name='edit_profile'),
 ]

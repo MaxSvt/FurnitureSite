@@ -1,4 +1,5 @@
 from django.contrib.auth import logout, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404, redirect
@@ -96,6 +97,29 @@ class ShowProfilePageView(DataMixin, DetailView):
         context['user_order'] = user_order
         context = dict(list(context.items()) + list(c_def.items()))
         return context
+
+
+@login_required
+def edit(request):
+    context = {
+
+    }
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            context = {'success': 1,
+                       'menu': menu,
+                       'title': 'Настройки',
+                       }
+            # return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    else:
+        user_form = UserEditForm(instance=request.user)
+        context['user_form'] = user_form
+        context['menu'] = menu
+        context['title'] = "Контакты"
+
+    return render(request, 'furniture_app/edit_profile.html', context=context)
 
 
 def logout_user(request):

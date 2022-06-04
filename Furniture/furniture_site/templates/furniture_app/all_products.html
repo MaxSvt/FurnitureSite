@@ -11,36 +11,32 @@
 
 {% block content %}
 
-<section class="py-5">
+        <section class="py-5">
             <div class="container px-4 px-lg-5 mt-3">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {% for p in products %}
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                <!-- Product image-->
-                                        {% if p.image %}
-                                            <a href="{% url 'product' p.slug %}"><img class="card-img-top" src="{{ p.image.url }}" alt="..." /></a>
-                                        {% endif %}
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder">{{p.title}}</h5>
-                                        <!-- Product price-->
-                                        {{p.price}} ₽
-                                    </div>
-                                </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' p.slug %}">Подробнее <i class="bi bi-arrow-right"></i></a>
-<!--                                        <a class="btn btn-outline-dark mt-auto" href="#!"><i class="bi bi-cart-plus"></i></a>-->
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col mb-2">
+                      <div class="card h-100 shadow-sm">
+                          {% if p.image %}
+                            <a href="{% url 'product' p.slug %}"><img class="card-img-top" src="{{ p.image.url }}" alt="..." /></a>
+                          {% endif %}
+
+                        <div class="card-body">
+                            <a href="{% url 'product' p.slug %}"><h5 class="fw-bolder">{{p.title}}</h5></a>
+                            <p> {{p.price}} ₽</p>
+                          <p class="card-text">{{ p.short_description }}</p>
+                          <div class="d-flex justify-content-between align-items-center">
+
+                              <button type="button" class="btn btn-sm btn-outline-secondary">
+                                  <a class="product-link" href="{% url 'product' p.slug %}">О товаре <i class="bi bi-arrow-right"></i></a>
+                              </button>
+
+                          </div>
                         </div>
-                    {% endfor %}
-                </div>
+                      </div>
+                    </div>
+                {% endfor %}
+              </div>
             </div>
         </section>
 {% endblock %}

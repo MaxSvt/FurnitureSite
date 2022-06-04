@@ -14,3 +14,19 @@ class MainImage(models.Model):
     class Meta:
         verbose_name = 'Фотография проектов'
         verbose_name_plural = 'Фотографии проектов'
+
+
+class ContactForm(models.Model):
+    first_name = models.CharField(max_length=200, verbose_name="Имя")
+    last_name = models.CharField(max_length=200, verbose_name="Фамилия")
+    phone_number = models.CharField(max_length=200, verbose_name="Номер телефона")
+    email = models.EmailField(max_length=200, verbose_name="Почта")
+    message = models.TextField(max_length=1000, verbose_name="Сообщение")
+
+    def __str__(self):
+        # Будет отображаться следующее поле в панели администрирования
+        return self.email
+
+    class Meta:
+        verbose_name = 'Обратная связь'
+        verbose_name_plural = 'Обратная связь'

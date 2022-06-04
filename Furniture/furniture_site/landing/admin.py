@@ -10,3 +10,12 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MainImage, ProductImageAdmin)
+
+
+class ContactFormAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name', 'phone_number', 'email', 'message')
+    list_display_links = ('id', 'phone_number', 'email')
+    search_fields = ('email', 'phone_number', )
+
+
+admin.site.register(ContactForm, ContactFormAdmin)
